@@ -13,7 +13,7 @@ commands:
 permissions:
  announce:
   default: "false"
-  children:
+  mxjosuedev:
    announce.send:
    default: op
    description: "Permission for send announce"
