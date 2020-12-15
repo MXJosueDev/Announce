@@ -4,4 +4,17 @@ version: 1.0.1
 api: 3.0.0
 main: MXJosueDev\Announce
 author: MXJosueDev
+
+commands:
+ announce:
+  description: "Send announce to server"
+  permission: announce.command
+  
+permissions:
+ announce:
+  default: "false"
+  children:
+   announce.send:
+   default: op
+   description: "Permission for send announce"
 ...
