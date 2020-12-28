@@ -32,7 +32,7 @@ class AnnounceCommand extends PluginCommand {
    *
    * @return bool|mixed|void
   */
-  public function execute(CommandSender $sender, string $label array $args){
+  public function execute(CommandSender $sender, string $label, array $args){
     if($this->testPermission($sender)){
       if(count($args) <= 0){
         $sender->sendMessage(TF::RED."Usage /announce <message>");
