@@ -2,29 +2,42 @@
 
 namespace MXJosueDev\Announce;
 
-use pocketmine\{plugin\PluginBase, Server, Player, command\CommandSender, command\Command, utils\TextFormat as TF};
+use MXJosueDev\Announce\Commands\AnnounceCommand;
+use pocketmine\plugin\PluginBase;
+use pocketmine\{Server, Player};
+use pocketmine\command\Command;
+use pocketmine\utils\TextFormat as TF;
 
 class Announce extends PluginBase {
   
-  public function onEnable(){
-    @mkdir($this->getDataFolder());
-    $this->saveDefaultConfig();
-    $this->saveResource("config.yml");
+  /**
+   * @var Announce $plugin
+  */
+  public $plugin;
+  
+  /**
+   * @var Instance $instance
+  */
+  public static $instance;
+  
+  /**
+   * @return void
+  */
+  public function onLoad() : void{
+    self::$instance = $this;
   }
   
-  public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args) : bool{
-    switch($cmd->getName){
-      case "announce":
-        if(count($args) == 0){
-          $sender->sendMessage(TF::RED."Usage /announce <message>");
-        }
-        if(count($args) >= 1){
-          $message = implode(" ", $args);
-          
-          Server::getInstance()->broadcastMessage($this->getConfig()->get("prefix"));
-          Server::getInstance()->broadcastMessage(TF::GRAY.$message);
-        }
-    }
-    return true;
+  /**
+   * @return void
+  */
+  public function onEnable() : void{
+    $this->getServer()->getCommandMap()->register(new AnnounceCommand($this));
+  }
+  
+  /**
+   * @return Announce
+  */
+  public function getInstace() : Announce{
+    return self::$instance;
   }
 }
