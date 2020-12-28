@@ -31,7 +31,7 @@ class Announce extends PluginBase {
    * @return void
   */
   public function onEnable() : void{
-    $this->getServer()->getCommandMap()->register(new AnnounceCommand($this));
+    $this->getServer()->getCommandMap()->register("announce", new AnnounceCommand($this));
   }
   
   /**
