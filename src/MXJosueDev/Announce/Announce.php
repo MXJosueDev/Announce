@@ -37,7 +37,7 @@ class Announce extends PluginBase {
   /**
    * @return Announce
   */
-  public function getInstace() : Announce{
+  public static function getInstance() : Announce{
     return self::$instance;
   }
 }
