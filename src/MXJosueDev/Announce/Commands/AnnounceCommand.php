@@ -13,7 +13,7 @@ use pocketmine\command\{PluginCommand, CommandSender};
 use pocketmine\{Server, Player};
 use pocketmine\utils\TextFormat as TF;
 
-class AnnounceCommand extends PluginCommand {
+class AnnounceCommand extends Command {
   
   /**
    * AnnounceCommand constructor.
@@ -21,18 +21,18 @@ class AnnounceCommand extends PluginCommand {
    * @param Announce $plugin
   */
   public function __construct(Announce $plugin){
-    parent::__construct("announce", $plugin);
+    parent::__construct("announce", " ", null, []);
     $this->setPermission("announce.send");
   }
   
   /**
    * @param CommandSender $sender
-   * @param string $label
-   * @param array $args
+   * @param Atring $label
+   * @param Array $args
    *
    * @return bool|mixed|void
   */
-  public function execute(CommandSender $sender, string $label, array $args){
+  public function execute(CommandSender $sender, String $label, Array $args){
     if($this->testPermission($sender)){
       if(count($args) <= 0){
         $sender->sendMessage(TF::RED."Usage /announce <message>");
