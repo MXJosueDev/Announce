@@ -39,7 +39,7 @@ class AnnounceCommand extends Command {
 	 * @return mixed|void
 	 */
 	public function execute(CommandSender $sender, String $label, Array $args){
-		if(!$this->testPermission()){
+		if(!$this->testPermission($sender)){
 			$sender->sendMessage(TF::RED."You don't have permission to use the command");
 			return;
 		}
@@ -50,7 +50,7 @@ class AnnounceCommand extends Command {
 		$msg = implode($args, ' ');
 		$this->plugin->getServer()->broadcastMessage(TF::RED.'[ANNOUNCE] '.TF::GRAY.$msg);
 		if($sender instanceof Player){
-			$sender->setPopup(TF::RED.'Announce sent');
+			$sender->sendPopup(TF::RED.'Announce sent');
 		}
 	}
 }
