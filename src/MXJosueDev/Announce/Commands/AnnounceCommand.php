@@ -1,46 +1,56 @@
 <?php
-/*  __  __  __  __      _                                ____                 
-*  |  \/  | \ \/ /     | |   ___    ___   _   _    ___  |  _ \    ___  __   __
-*  | |\/| |  \  /   _  | |  / _ \  / __| | | | |  / _ \ | | | |  / _ \ \ \ / /
-*  | |  | |  /  \  | |_| | | (_) | \__ \ | |_| | |  __/ | |_| | |  __/  \ V / 
-*  |_|  |_| /_/\_\  \___/   \___/  |___/  \__,_|  \___| |____/   \___|   \_/  
-*/                                                                           
-
+declare(strict_types=1);
+/**
+ * Announce Plugin.
+ *
+ * Author: MXJosueDev
+ * Status: Public
+ * Contributors: None
+ */
 namespace MXJosueDev\Announce\Commands;
 
 use MXJosueDev\Announce\Announce;
-use pocketmine\command\{PluginCommand, CommandSender};
-use pocketmine\{Server, Player};
+
+use pocketmine\command\{Command, CommandSender};
+use pocketmine\Player;
 use pocketmine\utils\TextFormat as TF;
 
 class AnnounceCommand extends Command {
-  
-  /**
-   * AnnounceCommand constructor.
-   *
-   * @param Announce $plugin
-  */
-  public function __construct(Announce $plugin){
-    parent::__construct("announce", " ", null, []);
-    $this->setPermission("announce.send");
-  }
-  
-  /**
-   * @param CommandSender $sender
-   * @param Atring $label
-   * @param Array $args
-   *
-   * @return bool|mixed|void
-  */
-  public function execute(CommandSender $sender, String $label, Array $args){
-    if($this->testPermission($sender)){
-      if(count($args) <= 0){
-        $sender->sendMessage(TF::RED."Usage /announce [string: message]");
-      }
-      if(count($args) >= 1){
-        $message = implode($args, " ");
-        Server::getInstance()->broadcastMessage(TF::RED."[ANNOUNCE] ".TF::GRAY.$message);
-      }
-    }
-  }
+	
+	/** @var Announce */
+	protected $plugin;
+	
+	/**
+	 * AnnounceCommand constructor.
+	 *
+	 * @param Announce $plugin
+	 */
+	public function __construct(Announce $plugin){
+		parent::__construct("announce", " ", null, []);
+		$this->setPermission("announce.cmd.use");
+		$this->plugin = $plugin
+	}
+	
+	/**
+	 * @param CommandSender $sender
+	 * @param String $label
+	 * @param Array $args
+	 *
+	 * @return mixed|void
+	 */
+	public function execute(CommandSender $sender, String $label, Array $args){
+		if(!$this->testPermission()){
+			$sender->sendMessage(TF::RED."You don't have permission to use the command");
+			return;
+		}
+		if(!isset($args[0])){
+			$sender->sendMessage(TF::RED."Usage /{$label} [string: message]");
+			return;
+		}
+		$msg = implode($args, ' ');
+		$this->plugin->getServer()->broadcastMessage(TF::RED.'[ANNOUNCE] '.TF::GRAY.$msg);
+		if($sender instanceof Player){
+			$sender->setPopup(TF::RED.'Announce sent');
+		}
+	}
 }
