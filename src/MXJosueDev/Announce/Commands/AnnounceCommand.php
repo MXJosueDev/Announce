@@ -28,7 +28,7 @@ class AnnounceCommand extends Command {
 	public function __construct(Announce $plugin){
 		parent::__construct("announce", " ", null, []);
 		$this->setPermission("announce.cmd.use");
-		$this->plugin = $plugin
+		$this->plugin = $plugin;
 	}
 	
 	/**
