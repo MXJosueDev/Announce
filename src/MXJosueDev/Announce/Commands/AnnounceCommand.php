@@ -35,14 +35,11 @@ class AnnounceCommand extends Command {
   public function execute(CommandSender $sender, String $label, Array $args){
     if($this->testPermission($sender)){
       if(count($args) <= 0){
-        $sender->sendMessage(TF::RED."Usage /announce <message>");
+        $sender->sendMessage(TF::RED."Usage /announce [string: message]");
       }
       if(count($args) >= 1){
         $message = implode($args, " ");
         Server::getInstance()->broadcastMessage(TF::RED."[ANNOUNCE] ".TF::GRAY.$message);
-        if($sender instanceof Player){
-          $sender->sendPopup(TF::WHITE."Announcement in progres...");
-        }
       }
     }
   }
