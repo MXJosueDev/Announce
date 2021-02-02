@@ -1,9 +1,10 @@
 # Announce
----
 Simple announce plugin.
 
-## Additional Information
 ---
+
+## Additional Information
+
 **Software:** Pockemine-MP
 
 **Author:** MXJosueDev
@@ -14,8 +15,10 @@ Simple announce plugin.
 
 **API:** 3.0.0
 
-## Usage
 ---
+
+## Usage
+
 ### Commands
 
 #### /announce
@@ -25,8 +28,10 @@ Simple announce plugin.
 
 **Permission:** announce.cmd.use
 
+---
+
 ## Links
 
 [**Pocketmine-MP**](https://github.com/pmmp)
 
-[**Repository**][https://github.com/MXJosueDev/Announce]
+[**Repository**](https://github.com/MXJosueDev/Announce)
