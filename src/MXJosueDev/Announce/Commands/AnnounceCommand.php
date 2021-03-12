@@ -48,9 +48,9 @@ class AnnounceCommand extends Command {
 			return;
 		}
 		$msg = implode($args, ' ');
-		$this->plugin->getServer()->broadcastMessage(TF::RED.'[ANNOUNCE] '.TF::GRAY.$msg);
+		$this->plugin->getServer()->broadcastMessage(TF::RED."[ANNOUNCE]\n".TF::GRAY.$msg);
 		if($sender instanceof Player){
-			$sender->sendPopup(TF::RED.'Announce sent');
+			$sender->sendPopup(TF::GREEN.'Announce send!');
 		}
 	}
 }
